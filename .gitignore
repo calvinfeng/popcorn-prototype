@@ -2,3 +2,5 @@
 vendor/
 log/
 *.iml
+environment/
+.ipynb_checkpoints/
