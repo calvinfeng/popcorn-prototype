@@ -1,5 +1,5 @@
 # Movie Gopher
-Coming soon! This shall replace my Consilium project. 
+This is a work in progress
 
 ## Setup
 ### Dependency Management with `dep`
@@ -12,7 +12,7 @@ go get -u github.com/golang/dep/cmd/dep
 If you are using Mac OS X then it's even easier
 
 ```
-brew install dep 
+brew install dep
 brew upgrade dep
 ```
 
@@ -34,13 +34,11 @@ $ psql postgres
 postgres=# create role cfeng superuser login;
 ```
 
-Then create a database named `movie_gopher_development`
+Create a database named `movie_gopher_development`, then just exit with `\q`.
 ```
 $ psql postgres
 postgres=# create database movie_gopher_development owner=cfeng;
 ```
-
-Then just exit with `\q`
 
 Actually just in case you don't remember the password to your `ROLE`, do the following
 ```
@@ -51,3 +49,12 @@ I did mine with
 ```
 postgres=# alter user cfeng with password "cfeng";
 ```
+
+## Next Implementation Steps
+[ ] Implement all the endpoints from Consilium
+[ ] Migrate the whole frontend folder to here
+[ ] Figure out how to seed a database
+[ ] Create a background running job that performs kNN using K-D Tree on movie latent features
+  * We begin recommending with similar movies first
+  * Then as the new user submits more movie ratings, we compute his/her latent vector
+[ ] Implement user authentication
