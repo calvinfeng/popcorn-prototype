@@ -51,10 +51,10 @@ postgres=# alter user cfeng with password "cfeng";
 ```
 
 ## Next Implementation Steps
-[ ] Implement all the endpoints from Consilium
-[ ] Migrate the whole frontend folder to here
-[ ] Figure out how to seed a database
-[ ] Create a background running job that performs kNN using K-D Tree on movie latent features
+* [ ] Implement all the endpoints from Consilium
+* [ ] Migrate the whole frontend folder to here
+* [ ] Figure out how to seed a database
+* [ ] Create a background running job that performs kNN using K-D Tree on movie latent features
   * We begin recommending with similar movies first
   * Then as the new user submits more movie ratings, we compute his/her latent vector
-[ ] Implement user authentication
+* [ ] Implement user authentication
