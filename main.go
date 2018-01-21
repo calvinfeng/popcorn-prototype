@@ -1,14 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"github.com/sirupsen/logrus"
+	"movie-gopher/matfac"
 	"net/http"
 	"time"
 )
 
 const Addr = ":3000"
 
-func main() {
+func StartService() {
 	logrus.SetFormatter(&logrus.TextFormatter{
 		FullTimestamp: true,
 	})
@@ -35,4 +37,15 @@ func main() {
 	if err := server.ListenAndServe(); err != nil {
 		logrus.Fatalf("Server failed to start: %v", err)
 	}
+}
+
+func main() {
+	// StartService()
+	movieMap, _ := matfac.LoadMovies("data/movies.csv")
+	ratingMap, _ := matfac.LoadRatingsByUserID("data/ratings.csv")
+	rec := matfac.NewRecommender(ratingMap, movieMap)
+
+	R := rec.GetRatingMatrix()
+	U, M := R.Dims()
+	fmt.Printf("R matrix: %v by %v\n", U, M)
 }

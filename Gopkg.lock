@@ -55,9 +55,15 @@
   packages = ["unix","windows"]
   revision = "0ac51a24ef1c37380f98ba8b98f56e3bffd59850"
 
+[[projects]]
+  branch = "master"
+  name = "gonum.org/v1/gonum"
+  packages = ["blas","blas/blas64","blas/gonum","floats","internal/asm/c128","internal/asm/f32","internal/asm/f64","internal/math32","lapack","lapack/gonum","lapack/lapack64","mat"]
+  revision = "34369ddb269db5a75d32a0bd9d5fbab094605b0a"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "300e644006efb5cb1f9902681ccd11fd631ff886503d0cdc867690e23dd0ea99"
+  inputs-digest = "860aab7f9ad6cf215bb4250494406918d0e71865b9747300d79a2014065420bd"
   solver-name = "gps-cdcl"
   solver-version = 1
