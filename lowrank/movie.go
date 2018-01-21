@@ -1,4 +1,4 @@
-package matfac
+package lowrank
 
 type Movie struct {
 	ID        int       `json:"id"`

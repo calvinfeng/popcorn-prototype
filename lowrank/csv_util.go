@@ -1,4 +1,4 @@
-package matfac
+package lowrank
 
 import (
 	"bufio"
@@ -70,18 +70,4 @@ func LoadMovies(filepath string) (map[int]*Movie, error) {
 	} else {
 		return nil, err
 	}
-}
-
-func Average(list []float64) float64 {
-	sum := 0.0
-
-	if len(list) == 0 {
-		return sum
-	}
-
-	for _, el := range list {
-		sum += el
-	}
-
-	return sum / float64(len(list))
 }

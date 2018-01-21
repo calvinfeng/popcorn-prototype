@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/sirupsen/logrus"
-	"movie-gopher/matfac"
+	"movie-gopher/lowrank"
 	"net/http"
 	"time"
 )
@@ -41,11 +40,10 @@ func StartService() {
 
 func main() {
 	// StartService()
-	movieMap, _ := matfac.LoadMovies("data/movies.csv")
-	ratingMap, _ := matfac.LoadRatingsByUserID("data/ratings.csv")
-	rec := matfac.NewRecommender(ratingMap, movieMap)
-
-	R := rec.GetRatingMatrix()
-	U, M := R.Dims()
-	fmt.Printf("R matrix: %v by %v\n", U, M)
+	movieMap, _ := lowrank.LoadMovies("data/movies.csv")
+	ratingMap, _ := lowrank.LoadRatingsByUserID("data/ratings.csv")
+	dp := lowrank.NewDataProcessor(ratingMap, movieMap)
+	R := dp.GetRatingMatrix()
+	rec := lowrank.NewRecommender(R, 50)
+	rec.Train(1000, 25, 0.5, 1e-5)
 }

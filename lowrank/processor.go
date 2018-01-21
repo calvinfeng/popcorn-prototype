@@ -1,10 +1,10 @@
-package matfac
+package lowrank
 
 import (
 	"gonum.org/v1/gonum/mat"
 )
 
-type Recommender struct {
+type DataProcessor struct {
 	UserIdToIndex  map[int]int
 	UserIndexToId  map[int]int
 	MovieIdToIndex map[int]int
@@ -13,7 +13,7 @@ type Recommender struct {
 	MovieMap       map[int]*Movie
 }
 
-func NewRecommender(ratingMap map[int]map[int]float64, movieMap map[int]*Movie) *Recommender {
+func NewDataProcessor(ratingMap map[int]map[int]float64, movieMap map[int]*Movie) *DataProcessor {
 	var i, j int
 	userIdToIndex := make(map[int]int)
 	userIndexToId := make(map[int]int)
@@ -41,7 +41,7 @@ func NewRecommender(ratingMap map[int]map[int]float64, movieMap map[int]*Movie) 
 		movieMap[movieId].AvgRating = Average(movieMap[movieId].Ratings)
 	}
 
-	return &Recommender{
+	return &DataProcessor{
 		UserIdToIndex:  userIdToIndex,
 		UserIndexToId:  userIndexToId,
 		MovieIdToIndex: movieIdToIndex,
@@ -51,8 +51,10 @@ func NewRecommender(ratingMap map[int]map[int]float64, movieMap map[int]*Movie) 
 	}
 }
 
-// We should have I users and J movies, with K latent features.
-func (r *Recommender) GetRatingMatrix() *mat.Dense {
+// GetRatingMatrix returns a I by J matrix where I represents the ith user and J represents the jth movie. The rating
+// matrix was supposed to be sparse but instead of filling it up with zero values. I've decided to set a movie's average
+// rating as its baseline. All zero valued spaces will be filled by a movie's average rating.
+func (r *DataProcessor) GetRatingMatrix() *mat.Dense {
 	I, J := len(r.RatingMap), len(r.MovieMap)
 	R := mat.NewDense(I, J, nil)
 	for i := 0; i < I; i += 1 {
