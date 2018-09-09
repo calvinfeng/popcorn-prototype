@@ -1,5 +1,5 @@
-# Movie Gopher
-This is a work in progress
+# Popcorn Prototype
+This is a prototype for the upcoming movie recommender application in Go. The live one can be found on Carmen To's GitHub page https://github.com/carment0/popcorn.
 
 ## Setup
 ### Dependency Management with `dep`
